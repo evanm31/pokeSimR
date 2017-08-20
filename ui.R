@@ -9,7 +9,7 @@ library(plotly)
 library(jsonlite)
 library(shinysky)
 
-poke <- read.csv("/home/evan/Pokemon.csv")
+poke <- read.csv("/your/path/to/Pokemon.csv")
 poke <- poke[- grep("Mega", poke$Name),]
 poke$Legendary <- plyr::revalue(poke$Legendary, c("False"="0", "True"="1"))
 poke$Legendary <- as.integer(poke$Legendary)
