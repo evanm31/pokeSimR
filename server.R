@@ -138,55 +138,9 @@ server <- function(input, output, session) {
     })
   })
   
-  #heatmap
-  #font params
-  f1 <- list(
-    family = "Old Standard TT, serif",
-    size = 8.5,
-    color = "black"
-  )
-  #x-axis params
-  x <- list(
-    autotick = T,
-    ticks = "outside",
-    tickcolor = toRGB("blue"),
-    tickfont = f1,
-    showticklabels = TRUE,
-    tickangle = 60
-  )
-  #y-axis params
-  y <- list(
-    autotick = T,
-    ticks = "outside",
-    tickcolor = toRGB("red"),
-    showticklabels = TRUE,
-    tickangle = 20,
-    tickfont = f1
-  )
-  
-  output$plot2 <- renderPlotly({
-    plot_ly(z = as.matrix(mat.sim[1:input$size,1:input$size]), x = rownames(mat.sim), y = colnames(mat.sim), type = "heatmap") %>% layout(xaxis = x, yaxis = y)
-  })
-  
   #data table
   output$table2 <- renderDataTable({
     pokeCopy
-  })
-  
-  #randomize heatmap
-  observeEvent(input$random, handlerExpr = {
-    output$plot2 <- renderPlotly({
-      samp <- sample(1:751, input$size, replace=FALSE)
-      mat.sim.samp <- mat.sim[samp,samp]
-      plot_ly(z = as.matrix(mat.sim.samp), x = rownames(mat.sim.samp), y = colnames(mat.sim.samp), type = "heatmap") %>% layout(xaxis = x, yaxis = y)
-    }) 
-  })
-  
-  #reset heatmap
-  observeEvent(input$normal, handlerExpr = {
-    output$plot2 <- renderPlotly({
-      plot_ly(z = as.matrix(mat.sim[1:input$size,1:input$size]), x = rownames(mat.sim), y = colnames(mat.sim), type = "heatmap") %>% layout(xaxis = x, yaxis = y)
-    })   
   })
   
 }
