@@ -92,22 +92,13 @@ ui <- shinyUI(
                        actionButton(inputId = "newPoke", "Generate Pokémon")),
       
       conditionalPanel(condition="input.tabselected==2",
-                       helpText("Heatmaps allow us to view the relationships between Pokémon on a broad scale; notice the trend of higher similarity between generations compared to the randomized version."),
-                       hr(),
-                       sliderInput("size", "Pokémon in plot:",
-                                   min = 5, max = 751, value = 250, step = 1),
-                       actionButton(inputId = "random", "Randomize Pokémon Order"),
-                       actionButton(inputId = "normal", "Reset Pokémon Order")),
-      
-      conditionalPanel(condition="input.tabselected==3",
                        helpText("Feel free to browse through the original dataset if you'd like!"),
                        hr())),
     
     mainPanel(
       tabsetPanel(
         tabPanel("Similarity Generator", textOutput("pokeInfo"), textOutput("pokeSim"), plotlyOutput("plot1"), tableOutput("table"), value = 1,  conditionalPanel(condition="input.tabselected==1")),
-        tabPanel("Similarity Heatmap", plotlyOutput("plot2"), value = 2,  conditionalPanel(condition="input.tabselected==2")),
-        tabPanel("Explore the Data", dataTableOutput("table2"), value = 3,  conditionalPanel(condition="input.tabselected==3")),
+        tabPanel("Explore the Data", dataTableOutput("table2"), value = 2,  conditionalPanel(condition="input.tabselected==2")),
         id = "tabselected")
     )
       )
